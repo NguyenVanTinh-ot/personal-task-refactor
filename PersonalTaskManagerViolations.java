@@ -71,18 +71,11 @@ public class PersonalTaskManagerViolations {
             System.out.println("Lỗi: Ngày đến hạn không hợp lệ. Vui lòng sử dụng định dạng YYYY-MM-DD.");
             return null;
         }
-        String[] validPriorities = {"Thấp", "Trung bình", "Cao"};
-        boolean isValidPriority = false;
-        for (String validP : validPriorities) {
-            if (validP.equals(priorityLevel)) {
-                isValidPriority = true;
-                break;
-            }
-        }
-        if (!isValidPriority) {
-            System.out.println("Lỗi: Mức độ ưu tiên không hợp lệ. Vui lòng chọn từ: Thấp, Trung bình, Cao.");
-            return null;
-        }
+        if (!isValidPriority(priorityLevel)) {
+    System.out.println("Lỗi: Mức độ ưu tiên không hợp lệ. Vui lòng chọn từ: Thấp, Trung bình, Cao.");
+    return null;
+}
+
 
         // Tải dữ liệu
         JSONArray tasks = loadTasksFromDb();
@@ -161,4 +154,13 @@ public class PersonalTaskManagerViolations {
             false
         );
     }
+  private boolean isValidPriority(String level) {
+    String[] validPriorities = {"Thấp", "Trung bình", "Cao"};
+    for (String valid : validPriorities) {
+        if (valid.equals(level)) return true;
+    }
+    return false;
+}
+
+  
 }
